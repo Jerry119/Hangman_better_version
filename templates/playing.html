@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<style>
+		.remain_cnt {
+			border:none;
+			font-size: 18px;
+		}
+	</style>
+    </head>
+    <body>
+        <h1 align="center">Welcome to Hangman Game</h1>
+        <h2 align="center">
+	{% for c in guess %}
+            {% if c == ' ' %}
+                &nbsp;&nbsp;
+	    {% else %}
+                {{c}}&nbsp;
+            {% endif %}
+        {% endfor %}
+	</h2>
+	<form action="" method="POST">
+		<h3>Hint: <input type="text" name="hint" class="remain_cnt" value="{{hint}}" readonly /></h3>
+		<h3>
+			Enter your guess(single letter): 
+			<input type="text" name="char" pattern="[A-Za-z]{1}" />
+			<input type="submit" value="submit" />
+		</h3>
+		<h3>Chances remaining: <input type="text" name="remain_cnt" class="remain_cnt" value="{{remain_cnt}}" readonly /></h3>
+		<h3>Best score: <input type="text" name="best_score" class="remain_cnt" value={{best_score}} readonly /></h3>
+		<input type="hidden" value="{{word}}" name="word" readonly />
+		<input type="hidden" value="{{guess}}" name="guess" readonly />
+	</form>
+	
+
+    </body>
+</html>

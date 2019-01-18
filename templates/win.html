@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<style>
+		.remain_cnt {
+			border:none;
+			font-size: 18px;
+		}
+		#win {
+			position: fixed;
+			z-index: 1;
+			top: 0;
+			left: 0;
+			text-align: center;
+			border: 2px solid black;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0,0,0,0.3);
+		}
+		#win_content {
+			top: 170px;
+			border: 2px solid black;
+			margin: auto;
+			width: 500px;
+			height: 200px;
+			position: relative;
+			background-color: white;
+		}
+		p {
+			font-size: 50px;
+		}
+		
+		#again {
+			border: 1px solid black;
+			top: 170px;
+			cursor: pointer;
+			height: 35px;
+			width: 150px;
+			background-color: black;
+			font-color: white;
+			color: white;
+			position: relative;
+			font-size: 20px;
+			margin-top: 10px;
+		}
+	</style>
+    </head>
+    <body>
+        <h1 align="center">Welcome to Hangman Game</h1>
+        <h2 align="center">{{ word }}</h2>
+	<form action="{{ url_for('in_game') }}" method="POST">
+		<h3>Hint: <input type="text" name="hint" class="remain_cnt" value="{{hint}}" readonly /></h3>
+		<h3>
+			Enter your guess(single letter): 
+			<input type="text" name="char" pattern="[A-Za-z]{1}" />
+			<input type="submit" value="submit" />
+		</h3>
+		<h3>Chances remaining: <input type="text" name="remain_cnt" class="remain_cnt" value="{{remain_cnt}}" readonly /></h3>
+		<h3>Best score: <input type="text" name="best_score" class="remain_cnt" value={{best_score}} readonly /></h3>
+	</form>
+
+	<div id="win">
+		<div id="win_content">
+			<p>SOLVED!<br />{{ remain_cnt }}</p>
+		</div>
+		<div>
+			<button id="again" onclick="window.location.href='/{{best_score}}'">NEXT PUZZLE</button>
+		</div>
+	</div>
+
+    </body>
+</html>
