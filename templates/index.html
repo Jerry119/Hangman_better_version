@@ -21,7 +21,7 @@
         {% endfor %}
 	</h2>
 	<form action="{{ url_for('in_game') }}" method="POST">
-		<h3>Hint: <input type="text" name="hint" class="remain_cnt" value="{{hint}}" readonly /></h3>
+		<h3>Hint: {{ hint }}</h3>
 		<h3>
 			Enter your guess(single letter): 
 			<input type="text" name="char" pattern="[A-Za-z]{1}" />
@@ -29,8 +29,6 @@
 		</h3>
 		<h3>Chances remaining: <input type="text" name="remain_cnt" class="remain_cnt" value="{{remain_cnt}}" readonly /></h3>
 		<h3>Best score: <input type="text" name="best_score" class="remain_cnt" value={{best_score}} readonly /></h3>
-		<input type="hidden" value="{{word}}" name="word" readonly />
-		<input type="hidden" value="" name="guess" readonly />
 	</form>
 	
 
