@@ -3,26 +3,44 @@ import random
 
 app = Flask(__name__)
 
+
+old_guess = ""
 word = ""
 hint = ""
-old_guess = ""
+
+def setWordHint():
+    f = open('word.txt', 'r')
+    lines = f.read().split('\n')
+    f.close()
+    n = random.randint(0, len(lines)-1)
+    line = lines[n]
+    word = line.split('?')[0]
+    hint = line.split('?')[1]
+    return word, hint
 
 @app.route('/')
 @app.route('/<best_score>')
 def home(best_score=0):
-    f = open('word.txt', 'r')
-    lines = f.read().split('\n')
-    n = random.randint(0, len(lines)-1)
-    line = lines[n]
     global word
-    word = line.split('?')[0]
     global hint
-    hint = line.split('?')[1]
+    word, hint = setWordHint()
     global old_guess
     old_guess = ""
-    f.close()
-
     return render_template("index.html", word=word, remain_cnt=5, best_score=best_score, hint=hint)
+
+# for unit test purpose
+def getHint():
+    return hint
+
+# for unit test purpose
+def setWord(w):
+    global word
+    word = w
+
+# for unit test purpose
+def setGuess(g):
+    global old_guess
+    old_guess = g
 
 @app.route('/in_game', methods=["POST"])
 def in_game():
